@@ -19,10 +19,10 @@ class CreateBeneficiariesTable extends Migration
             $table->string('nama_penerima');
             $table->string('nomor_ktp');
             $table->string('nomor_induk_keluarga');
-            $table->text('alamat_asal');
-            $table->text('alamat_domisili');
             $table->string('nomor_rekening');
             $table->string('nomor_telpon');
+            $table->text('alamat_asal');
+            $table->text('alamat_domisili');
             $table->enum('jenis_kelamin',['Pria','Wanita']);
             $table->dateTime('tanggal_lahir');
             $table->timestamps();
