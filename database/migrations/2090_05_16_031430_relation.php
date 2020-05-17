@@ -15,11 +15,18 @@ class Relation extends Migration
     {
         Schema::table('beneficiary_criterias', function (Blueprint $table) {
             $table->foreign('funds_assistance_period_id')->references('id')->on('funds_assistance_periods')->onDelete('cascade');
-            $table->foreign('beneficiary_id')->references('id')->on('beneficiaries')->onDelete('cascade');
+            $table->foreign('financial_submission_id')->references('id')->on('financial_submissions')->onDelete('cascade');
             $table->foreign('criteria_id')->references('id')->on('criterias')->onDelete('cascade');
         });
         Schema::table('beneficiaries', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+        Schema::table('sub_criterias', function (Blueprint $table) {
+            $table->foreign('criteria_id')->references('id')->on('criterias')->onDelete('cascade');
+        });
+        Schema::table('financial_submissions', function (Blueprint $table) {
+            $table->foreign('sub_criteria_id')->references('id')->on('sub_criterias')->onDelete('cascade');
+            $table->foreign('beneficiary_id')->references('id')->on('beneficiaries')->onDelete('cascade');
         });
 
     }

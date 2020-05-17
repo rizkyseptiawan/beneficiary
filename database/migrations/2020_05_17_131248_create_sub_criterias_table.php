@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBeneficiaryCriteriasTable extends Migration
+class CreateSubCriteriasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateBeneficiaryCriteriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('beneficiary_criterias', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('funds_assistance_period_id');
-            $table->unsignedBigInteger('financial_submission_id');
+        Schema::create('sub_criterias', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('criteria_id');
-            $table->unsignedDecimal('nilai');
+            $table->unsignedBigInteger('nilai_sub_kriteria');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +28,6 @@ class CreateBeneficiaryCriteriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('beneficiary_criterias');
+        Schema::dropIfExists('sub_criterias');
     }
 }
