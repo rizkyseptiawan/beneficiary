@@ -13,7 +13,8 @@ class BeneficiaryController extends Controller
      */
     public function index()
     {
-        //
+        $beneficiaries = \App\Beneficiary::paginate(10);
+        return view('beneficiary.index',compact('beneficiaries'));
     }
 
     /**
@@ -23,7 +24,7 @@ class BeneficiaryController extends Controller
      */
     public function create()
     {
-        //
+        return view('beneficiary.create');
     }
 
     /**

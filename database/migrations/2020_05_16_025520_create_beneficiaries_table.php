@@ -15,7 +15,7 @@ class CreateBeneficiariesTable extends Migration
     {
         Schema::create('beneficiaries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('nama_penerima');
             $table->string('nomor_ktp');
             $table->string('nomor_induk_keluarga');

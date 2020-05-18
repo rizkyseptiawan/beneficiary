@@ -21,4 +21,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/daftar-penerima-bantuan', 'BeneficiaryController@index')->name('beneficiary');
+Route::get('/penerima-bantuan/tambah', 'BeneficiaryController@create')->name('beneficiary.create');
 

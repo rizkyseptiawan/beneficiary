@@ -82,6 +82,7 @@
   <script src="{{ asset('modules/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
   <script src="{{ asset('modules/summernote/dist/summernote-bs4.js') }}"></script>
   <script src="{{ asset('modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+  <script src="{{ asset('modules/jquery-ui-dist/jquery-ui.min.js') }}"></script>
 
   <!-- Template JS File -->
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -89,5 +90,6 @@
 
   <!-- Page Specific JS File -->
   <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
+  @yield('custom')
 </body>
 </html>

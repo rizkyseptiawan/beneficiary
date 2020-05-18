@@ -17,6 +17,9 @@
             <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-calendar-alt"></i><span>Periode Bantuan</span></a>
         </li>
         <li class="nav-item">
+            <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-square-root-alt"></i><span>Dukung Keputusan</span></a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-history"></i><span>Riwayat
                     Bantuan</span></a>
         </li>

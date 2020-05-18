@@ -14,7 +14,7 @@ class CreateFundsAssistancePeriodsTable extends Migration
     public function up()
     {
         Schema::create('funds_assistance_periods', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('periode_bantuan');
             $table->enum('jenis_bantuan',['dana','sembako']);
             $table->string('item_bantuan');
