@@ -67,7 +67,7 @@ class BeneficiaryController extends Controller
             'alamat_asal' => $request->alamat_asal,
             'alamat_domisili' => $request->alamat_domisili,
         ]);
-        return redirect()->back()->withToastSuccess('Berhasil menambahkan data penerima baru');
+        return redirect()->back()->withToastSuccess('Berhasil menambahkan data penerimabantuan baru');
     }
 
     /**

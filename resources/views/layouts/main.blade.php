@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title') - {{ config('app.name', 'Laravel') }}</title>
 
   <!-- General CSS Files -->
@@ -14,6 +15,7 @@
   <link rel="stylesheet" href="{{ asset('modules/weathericons/css/weather-icons.min.css') }}">
   <link rel="stylesheet" href="{{ asset('modules/weathericons/css/weather-icons-wind.min.css') }}">
   <link rel="stylesheet" href="{{ asset('modules/summernote/dist/summernote-bs4.css') }}">
+  <link rel="stylesheet" href="{{ asset('modules/izitoast/dist/css/iziToast.min.css') }}">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -51,9 +53,16 @@
       <div class="main-content">
         <section class="section">
           <div class="section-header">
+            @if(request()->route()->getName() != 'dashboard')
+            <div class="section-header-back">
+              <a href="{{ url()->previous() }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            </div>
+            @endif
             <h1>@yield('title')</h1>
+            @yield('action')
           </div>
           @yield('content')
+          
         </section>
       </div>
       <footer class="main-footer">
@@ -83,14 +92,16 @@
   <script src="{{ asset('modules/summernote/dist/summernote-bs4.js') }}"></script>
   <script src="{{ asset('modules/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
   <script src="{{ asset('modules/jquery-ui-dist/jquery-ui.min.js') }}"></script>
+  <script src="{{ asset('modules/izitoast/dist/js/iziToast.min.js') }}"></script>
+  @include('sweetalert::alert')
 
   <!-- Template JS File -->
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/custom.js') }}"></script>
+  <script src="{{ asset('assets/js/crud.js') }}"></script>
 
   <!-- Page Specific JS File -->
   <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
-  @include('sweetalert::alert')
   @yield('custom')
 </body>
 </html>

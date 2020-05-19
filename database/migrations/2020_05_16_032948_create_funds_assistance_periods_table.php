@@ -18,6 +18,7 @@ class CreateFundsAssistancePeriodsTable extends Migration
             $table->string('periode_bantuan');
             $table->enum('jenis_bantuan',['dana','sembako']);
             $table->string('item_bantuan');
+            $table->enum('status',['Dibuka','Ditutup']);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -31,4 +31,12 @@ Route::group(['as' => 'periode.','prefix' => 'periode-bantuan'], function () {
     Route::get('/tambah', 'AidPeriodController@create')->name('create');
     Route::post('/tambah', 'AidPeriodController@store')->name('store');
 });
+Route::group(['as' => 'criteria.','prefix' => 'kriteria'], function () {
+    Route::get('/daftar', 'CriteriaController@index')->name('index');
+    Route::get('/tambah', 'CriteriaController@create')->name('create');
+    Route::get('{id}/edit', 'CriteriaController@edit')->name('edit');
+    Route::patch('{id}/update', 'CriteriaController@update')->name('update');
+    Route::post('/tambah', 'CriteriaController@store')->name('store');
+    Route::delete('{id}/hapus', 'CriteriaController@destroy')->name('delete');
+});
 

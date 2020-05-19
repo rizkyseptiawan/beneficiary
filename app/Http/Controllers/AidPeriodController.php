@@ -13,6 +13,7 @@ class AidPeriodController extends Controller
      */
     public function index(Request $request)
     {
+        $periods = new \App\FundsAssistancePeriod;
         if($request->has('search')){
             $search = $request->search;
             $periods = \App\FundsAssistancePeriod::where('periode_bantuan','like',"%".$search."%")->paginate(10);
@@ -45,6 +46,7 @@ class AidPeriodController extends Controller
             'periode_bantuan' => 'required|string|min:3',
             'item_bantuan' => 'required|string|min:3',
             'jenis_bantuan' => 'required|in:dana,sembako',
+            'status_periode' => 'required|in:Dibuka,Ditutup',
         ];
         $validation = Validator::make($input,$dataValidation);
         if($validation->fails()){
@@ -54,6 +56,7 @@ class AidPeriodController extends Controller
             'periode_bantuan' => $request->periode_bantuan,
             'item_bantuan' => $request->item_bantuan,
             'jenis_bantuan' => $request->jenis_bantuan,
+            'status_periode' => $request->status_periode,
         ]);
         return redirect()->back()->withToastSuccess('Berhasil menambahkan data periode');
     }
