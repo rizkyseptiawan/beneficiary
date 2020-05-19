@@ -46,7 +46,7 @@ class AidPeriodController extends Controller
             'periode_bantuan' => 'required|string|min:3',
             'item_bantuan' => 'required|string|min:3',
             'jenis_bantuan' => 'required|in:dana,sembako',
-            'status_periode' => 'required|in:Dibuka,Ditutup',
+            'status' => 'required|in:Dibuka,Ditutup',
         ];
         $validation = Validator::make($input,$dataValidation);
         if($validation->fails()){
@@ -56,7 +56,7 @@ class AidPeriodController extends Controller
             'periode_bantuan' => $request->periode_bantuan,
             'item_bantuan' => $request->item_bantuan,
             'jenis_bantuan' => $request->jenis_bantuan,
-            'status_periode' => $request->status_periode,
+            'status' => $request->status,
         ]);
         return redirect()->back()->withToastSuccess('Berhasil menambahkan data periode');
     }
@@ -80,7 +80,8 @@ class AidPeriodController extends Controller
      */
     public function edit($id)
     {
-        //
+        $period = \App\FundsAssistancePeriod::findOrFail($id);
+        return view('periode.edit',compact('period'));
     }
 
     /**
@@ -92,7 +93,25 @@ class AidPeriodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $period = \App\FundsAssistancePeriod::findOrFail($id);
+        $input = $request->all();
+        $dataValidation = [
+            'periode_bantuan' => 'required|string|min:3',
+            'item_bantuan' => 'required|string|min:3',
+            'jenis_bantuan' => 'required|in:dana,sembako',
+            'status' => 'required|in:Dibuka,Ditutup',
+        ];
+        $validation = Validator::make($input,$dataValidation);
+        if($validation->fails()){
+            return redirect()->back()->withToastError($validation->messages()->all()[0])->withInput();
+        }
+        $period->update([
+            'periode_bantuan' => $request->periode_bantuan,
+            'item_bantuan' => $request->item_bantuan,
+            'jenis_bantuan' => $request->jenis_bantuan,
+            'status' => $request->status,
+        ]);
+        return redirect()->back()->withToastSuccess('Berhasil memperbarui data periode');
     }
 
     /**
@@ -103,6 +122,11 @@ class AidPeriodController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $period = \App\FundsAssistancePeriod::find($id);
+        if(is_null($period)){
+            return response()->json(['status' => false, 'message' => 'Data tidak ditemukan'], 403);
+        }
+        $period->delete();
+        return response()->json(['status' => true, 'message' => 'Data Berhasil Dihapus']);
     }
 }

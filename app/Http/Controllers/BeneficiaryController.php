@@ -43,10 +43,10 @@ class BeneficiaryController extends Controller
         $input = $request->all();
         $dataValidation = [
             'nama_penerima' => 'required|string|min:3',
-            'nomor_ktp' => 'required|numeric|digits_between:16,16',
+            'nomor_ktp' => 'required|numeric|digits_between:16,16|unique:beneficiaries,nomor_ktp',
             'nomor_induk_keluarga' => 'required|numeric|digits_between:16,16',
             'nomor_rekening' => 'required|numeric|digits_between:10,15',
-            'nomor_telpon' => 'required|numeric|digits_between:9,13',
+            'nomor_telpon' => 'required|numeric|digits_between:9,13|unique:beneficiaries,nomor_telpon',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:pria,wanita',
             'alamat_asal' => 'required|string|min:3',
@@ -89,7 +89,8 @@ class BeneficiaryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $beneficiary = \App\Beneficiary::findOrFail($id);
+        return view('beneficiary.edit',compact('beneficiary'));
     }
 
     /**
@@ -101,7 +102,41 @@ class BeneficiaryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $beneficiary = \App\Beneficiary::findOrFail($id);
+        $input = $request->all();
+        $dataValidation = [
+            'nama_penerima' => 'required|string|min:3',
+            'nomor_induk_keluarga' => 'required|numeric|digits_between:16,16',
+            'nomor_rekening' => 'required|numeric|digits_between:10,15',
+            'tanggal_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|in:pria,wanita',
+            'alamat_asal' => 'required|string|min:3',
+            'alamat_domisili' => 'required|string|min:3',
+        ];
+        if($input['nomor_telpon'] != $beneficiary->nomor_telpon)
+        {
+            $dataValidation['nomor_telpon'] = 'required|numeric|digits_between:9,13|unique:beneficiaries,nomor_telpon';
+        }
+        if($input['nomor_ktp'] != $beneficiary->nomor_ktp)
+        {
+            $dataValidation['nomor_ktp'] = 'required|numeric|digits_between:16,16|unique:beneficiaries,nomor_ktp';
+        }
+        $validation = Validator::make($input,$dataValidation);
+        if($validation->fails()){
+            return redirect()->back()->withToastError($validation->messages()->all()[0])->withInput();
+        }
+        $beneficiary->update([
+            'nama_penerima' => $request->nama_penerima,
+            'nomor_ktp' => $request->nomor_ktp,
+            'nomor_induk_keluarga' => $request->nomor_induk_keluarga,
+            'nomor_rekening' => $request->nomor_rekening,
+            'nomor_telpon' => $request->nomor_telpon,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'alamat_asal' => $request->alamat_asal,
+            'alamat_domisili' => $request->alamat_domisili,
+        ]);
+        return redirect()->back()->withToastSuccess('Berhasil memperbarui data calon penerima bantuan');
     }
 
     /**
@@ -112,6 +147,11 @@ class BeneficiaryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $beneficiary = \App\Beneficiary::find($id);
+        if(is_null($beneficiary)){
+            return response()->json(['status' => false, 'message' => 'Data tidak ditemukan'], 403);
+        }
+        $beneficiary->delete();
+        return response()->json(['status' => true, 'message' => 'Data Berhasil Dihapus']);
     }
 }

@@ -28,28 +28,41 @@
                                     <i class="fas fa-th"></i>
                                 </th>
                                 <th>Periode Bantuan</th>
-                                <th>Jenis Bantuan</th>
-                                <th>item Bantuan</th>
-                                <th>Action</th>
+                                <th class="text-center">Jenis Bantuan</th>
+                                <th class="text-center">Item Bantuan</th>
+                                <th class="text-center">Status Periode</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($periods as $item)
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     <div class="sort-handler">
                                         <i class="fas fa-th"></i>
                                     </div>
                                 </td>
                                 <td>{{ $item->periode_bantuan }}</td>
-                                <td>
-                                    <div class="badge badge-success">{{ $item->jenis_bantuan }}</div>
+                                <td class="text-center">
+                                    <div class="badge badge-success text-capitalize">{{ $item->jenis_bantuan }}</div>
                                 </td>
-                                <td>{{ $item->item_bantuan }}</td>
+                                <td class="text-center">{{ $item->item_bantuan }}</td>
+                                <td class="text-center">
+                                    @if($item->status == 'Dibuka')
+                                    <div class="badge badge-info">
+                                        {{ $item->status }}
+                                    </div>
+                                    @else
+                                    <div class="badge badge-danger">
+                                        {{ $item->status }}
+                                    </div>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-secondary"><i class="fas fa-eye"></i></a>
-                                        <a href="#" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>      
+                                        <a href="{{ route('periode.edit',$item->id) }}" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>      
+                                        <a href="#" onclick="deleteData('{{ route('periode.delete',$item->id) }}','{{ $item->periode_bantuan }}')" class="btn btn-danger"><i class="fas fa-trash"></i></a>      
                                     </div>
                                 </td>
                             </tr>

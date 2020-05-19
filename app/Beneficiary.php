@@ -8,6 +8,7 @@ class Beneficiary extends Model
 {
     use SoftDeletes;
     protected $guarded = ['id'];
+    protected $dates = ['tanggal_lahir'];
 
     public function user()
     {

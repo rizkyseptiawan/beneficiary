@@ -18,8 +18,8 @@ class CreateFinancialSubmissionsTable extends Migration
             $table->unsignedBigInteger('beneficiary_id');
             $table->unsignedBigInteger('funds_assistance_period_id');
             $table->string('kode_pengajuan')->unique();
-            $table->unsignedDecimal('nilai_total_kriteria');
-            $table->enum('status_pengajuan',['Pengajuan','Diterima','Belum Berkesempatan'])->default('Pengajuan');
+            $table->unsignedDecimal('nilai_total_kriteria')->nullable();
+            $table->enum('status_pengajuan',['Pengajuan','Seleksi','Diterima','Belum Berkesempatan'])->default('Pengajuan');
             $table->timestamps();
             $table->softDeletes();
         });

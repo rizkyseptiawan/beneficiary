@@ -32,7 +32,7 @@
                                 <th>Nomor Induk Keluarga</th>
                                 <th>Nomor Rekening</th>
                                 <th>Nomor Telpon</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,8 +54,9 @@
                                 <td>{{ $item->nomor_telpon }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="#" class="btn btn-secondary"><i class="fas fa-eye"></i></a>
-                                        <a href="#" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href="{{ route('beneficiary.show',$item->id) }}" class="btn btn-secondary"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('beneficiary.edit',$item->id) }}" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href="#" onClick="deleteData('{{ route('beneficiary.delete',$item->id) }}','{{ $item->nama_penerima }}')"class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                     </td>
 
                                     </div>
