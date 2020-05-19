@@ -18,6 +18,7 @@ class CreateSubCriteriasTable extends Migration
             $table->unsignedBigInteger('criteria_id');
             $table->unsignedBigInteger('nilai_sub_kriteria');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

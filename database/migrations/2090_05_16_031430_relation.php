@@ -19,7 +19,7 @@ class Relation extends Migration
         });
         Schema::table('financial_submission_details', function (Blueprint $table) {
             $table->foreign('criteria_id')->references('id')->on('criterias')->onDelete('cascade');
-            $table->foreign('beneficiary_id')->references('id')->on('beneficiaries')->onDelete('cascade');
+            $table->foreign('financial_submission_id')->references('id')->on('financial_submissions')->onDelete('cascade');
         });
         Schema::table('beneficiaries', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

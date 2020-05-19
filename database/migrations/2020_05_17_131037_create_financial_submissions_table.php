@@ -21,6 +21,7 @@ class CreateFinancialSubmissionsTable extends Migration
             $table->unsignedDecimal('nilai_total_kriteria');
             $table->enum('status_pengajuan',['Pengajuan','Diterima','Belum Berkesempatan'])->default('Pengajuan');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

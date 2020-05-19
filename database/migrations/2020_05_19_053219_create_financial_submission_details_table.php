@@ -19,6 +19,7 @@ class CreateFinancialSubmissionDetailsTable extends Migration
             $table->unsignedBigInteger('criteria_id');
             $table->unsignedBigInteger('nilai_kriteria');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
