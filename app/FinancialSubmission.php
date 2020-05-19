@@ -8,15 +8,14 @@ class FinancialSubmission extends Model
 {
     protected $guarded = ['id'];
 
-    public function SubCriteria()
-    {
-        return $this->belongsTo('App\SubCriteria');
-    }
-
-    public function Beneficiary()
+    public function beneficiary()
     {
         return $this->belongsTo('App\Beneficiary');
     }
 
+    public function funds_assistance_period()
+    {
+        return $this->belongsTo('App\FundsAssistancePeriod');
+    }
 
 }

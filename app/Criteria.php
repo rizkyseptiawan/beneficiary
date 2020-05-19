@@ -8,14 +8,14 @@ class Criteria extends Model
 {
     protected $guarded = ['id'];
 
-    public function SubCriterias()
+    public function sub_criterias()
     {
         return $this->hasMany('App\SubCriteria');
     }
 
-    public function BeneficiaryCriterias()
+    public function financial_submissions()
     {
-        return $this->hasMany('App\BeneficiaryCriteria');
+        return $this->hasMany('App\FinancialSubmission');
     }
 
 

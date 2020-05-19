@@ -2,71 +2,79 @@
 @section('title','Tambah Penerima Bantuan')
 @section('content')
 <div class="section-body">
-    {{-- <h2 class="section-title">Create New Post</h2>
-    <p class="section-lead">
-      On this page you can create a new post and fill in all fields.
-    </p> --}}
-
     <div class="row">
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h4>Write Your Post</h4>
+            <h4>Isikan Data Penerima Bantuan Secara Lengkap</h4>
           </div>
           <div class="card-body">
-            <div class="form-group row mb-4">
-              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
-              <div class="col-sm-12 col-md-7">
-                <input type="text" class="form-control">
-              </div>
-            </div>
-            <div class="form-group row mb-4">
-              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
-              <div class="col-sm-12 col-md-7">
-                <select class="form-control selectric">
-                  <option>Tech</option>
-                  <option>News</option>
-                  <option>Political</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row mb-4">
-              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
-              <div class="col-sm-12 col-md-7">
-                <textarea class="summernote-simple"></textarea>
-              </div>
-            </div>
-            <div class="form-group row mb-4">
-              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
-              <div class="col-sm-12 col-md-7">
-                <div id="image-preview" class="image-preview">
-                  <label for="image-upload" id="image-label">Choose File</label>
-                  <input type="file" name="image" id="image-upload" />
+            <form action="{{ route('beneficiary.store') }}" method="post">
+              @csrf
+              <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Penerima</label>
+                <div class="col-sm-12 col-md-7">
+                  <input type="text" name="nama_penerima" class="form-control" value="{{ old('nama_penerima') }}">
                 </div>
               </div>
-            </div>
-            <div class="form-group row mb-4">
-              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
-              <div class="col-sm-12 col-md-7">
-                <input type="text" class="form-control inputtags">
+              <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nomor KTP</label>
+                <div class="col-sm-12 col-md-7">
+                  <input type="number" name="nomor_ktp" class="form-control" value="{{ old('nomor_ktp') }}">
+                </div>
               </div>
-            </div>
-            <div class="form-group row mb-4">
-              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
-              <div class="col-sm-12 col-md-7">
-                <select class="form-control selectric">
-                  <option>Publish</option>
-                  <option>Draft</option>
-                  <option>Pending</option>
-                </select>
+              <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nomor Induk Keluarga</label>
+                <div class="col-sm-12 col-md-7">
+                  <input type="number" name="nomor_induk_keluarga" class="form-control" value="{{ old('nomor_induk_keluarga') }}">
+                </div>
               </div>
-            </div>
-            <div class="form-group row mb-4">
-              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-              <div class="col-sm-12 col-md-7">
-                <button class="btn btn-primary">Create Post</button>
+              <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nomor Rekening</label>
+                <div class="col-sm-12 col-md-7">
+                  <input type="number" name="nomor_rekening" class="form-control" value="{{ old('nomor_rekening') }}">
+                </div>
               </div>
-            </div>
+              <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nomor Telpon</label>
+                <div class="col-sm-12 col-md-7">
+                  <input type="text" name="nomor_telpon" class="form-control" value="{{ old('nomor_telpon') }}">
+                </div>
+              </div>
+              <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tanggal Lahir</label>
+                <div class="col-sm-12 col-md-7">
+                  <input type="date" name="tanggal_lahir" class="form-control" value="{{ old('tanggal_lahir') }}">
+                </div>
+              </div>
+              <div class="form-group row mb-4">
+                  <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Kelamin</label>
+                  <div class="col-sm-12 col-md-7">
+                    <select name="jenis_kelamin" class="form-control selectric">
+                      <option value="pria" @if(old('jenis_kelamin') == 'pria') selected @endif>Pria</option>
+                      <option value="wanita" @if(old('jenis_kelamin') == 'wanita') selected @endif>Wanita</option>
+                    </select>
+                  </div>
+                </div>
+              <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat Asal</label>
+                <div class="col-sm-12 col-md-7">
+                  <textarea name="alamat_asal" class="form-control" rows="60">{{ old('alamat_asal') }}</textarea>
+                </div>
+              </div>
+              <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat Domisili</label>
+                <div class="col-sm-12 col-md-7">
+                  <textarea name="alamat_domisili" class="form-control" rows="60">{{ old('alamat_domisili') }}</textarea>
+                </div>
+              </div>
+              <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                <div class="col-sm-12 col-md-7">
+                  <button class="btn btn-primary">Tambahkan Data</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ class Beneficiary extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function FinancialSubmissions()
+    public function financial_submissions()
     {
         return $this->hasMany('App\FinancialSubmission');
     }

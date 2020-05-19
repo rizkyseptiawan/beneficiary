@@ -1,12 +1,12 @@
 @extends('layouts.main')
-@section('title','Daftar Penerima Bantuan')
+@section('title','Periode Bantuan')
 @section('content')
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
                 <h4>
-                    <a href="{{ route('beneficiary.create') }}" class="btn btn-primary">Tambah Data</a>
+                    <a href="{{ route('periode.create') }}" class="btn btn-primary">Tambah Data</a>
                 </h4>
                 <div class="card-header-action">
                     <form>
@@ -27,38 +27,31 @@
                                 <th class="text-center">
                                     <i class="fas fa-th"></i>
                                 </th>
-                                <th>Nama Penerima</th>
-                                <th>Nomor KTP</th>
-                                <th>Nomor Induk Keluarga</th>
-                                <th>Nomor Rekening</th>
-                                <th>Nomor Telpon</th>
+                                <th>Periode Bantuan</th>
+                                <th>Jenis Bantuan</th>
+                                <th>item Bantuan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($beneficiaries as $item)
+                            @forelse($periods as $item)
                             <tr>
                                 <td>
                                     <div class="sort-handler">
                                         <i class="fas fa-th"></i>
                                     </div>
                                 </td>
-                                <td>{{ $item->nama_penerima }}</td>
-                                <td>{{ $item->nomor_ktp }}</td>
+                                <td>{{ $item->periode_bantuan }}</td>
                                 <td>
-                                    {{ $item->nomor_induk_keluarga }}
+                                    <div class="badge badge-success">{{ $item->jenis_bantuan }}</div>
                                 </td>
-                                <td>
-                                    <div class="badge badge-success">{{ $item->nomor_rekening }}</div>
-                                </td>
-                                <td>{{ $item->nomor_telpon }}</td>
+                                <td>{{ $item->item_bantuan }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-secondary"><i class="fas fa-eye"></i></a>
-                                        <a href="#" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
-                                    </td>
-
+                                        <a href="#" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>      
                                     </div>
+                                </td>
                             </tr>
                             @empty
                                 <tr >
@@ -69,7 +62,7 @@
                     </table>
                 </div>
             </div>
-            {{ $beneficiaries->links() }}
+            {{ $periods->links() }}
             {{-- <div class="card-footer text-right">
                 <nav class="d-inline-block">
                   <ul class="pagination mb-0">
@@ -98,7 +91,7 @@
 });
 
 $('#input-search').on('change', function(){
-    var link = "{{ route('beneficiary.index') }}";
+    var link = "{{ route('periode.index') }}";
     var query = "?search="
     var text= $(this).val();
     $('#btn-search').attr('href', link + query + text);

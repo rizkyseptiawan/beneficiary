@@ -21,6 +21,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/daftar-penerima-bantuan', 'BeneficiaryController@index')->name('beneficiary');
-Route::get('/penerima-bantuan/tambah', 'BeneficiaryController@create')->name('beneficiary.create');
+Route::group(['as' => 'beneficiary.','prefix' => 'penerima-bantuan'], function () {
+    Route::get('/daftar', 'BeneficiaryController@index')->name('index');
+    Route::get('/tambah', 'BeneficiaryController@create')->name('create');
+    Route::post('/tambah', 'BeneficiaryController@store')->name('store');
+});
+Route::group(['as' => 'periode.','prefix' => 'periode-bantuan'], function () {
+    Route::get('/daftar', 'AidPeriodController@index')->name('index');
+    Route::get('/tambah', 'AidPeriodController@create')->name('create');
+    Route::post('/tambah', 'AidPeriodController@store')->name('store');
+});
 

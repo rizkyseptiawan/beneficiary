@@ -90,6 +90,7 @@
 
   <!-- Page Specific JS File -->
   <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
+  @include('sweetalert::alert')
   @yield('custom')
 </body>
 </html>

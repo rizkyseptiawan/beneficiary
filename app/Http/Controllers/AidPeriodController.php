@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Validator;
 class AidPeriodController extends Controller
 {
     /**
@@ -11,9 +11,15 @@ class AidPeriodController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->has('search')){
+            $search = $request->search;
+            $periods = \App\FundsAssistancePeriod::where('periode_bantuan','like',"%".$search."%")->paginate(10);
+            return view('periode.index',compact('periods'));
+        }
+        $periods = \App\FundsAssistancePeriod::paginate(10);
+        return view('periode.index',compact('periods'));
     }
 
     /**
@@ -23,7 +29,7 @@ class AidPeriodController extends Controller
      */
     public function create()
     {
-        //
+        return view('periode.create');
     }
 
     /**
@@ -34,7 +40,22 @@ class AidPeriodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $dataValidation = [
+            'periode_bantuan' => 'required|string|min:3',
+            'item_bantuan' => 'required|string|min:3',
+            'jenis_bantuan' => 'required|in:dana,sembako',
+        ];
+        $validation = Validator::make($input,$dataValidation);
+        if($validation->fails()){
+            return redirect()->back()->withToastError($validation->messages()->all()[0])->withInput();
+        }
+        $periode = \App\FundsAssistancePeriod::firstOrCreate([
+            'periode_bantuan' => $request->periode_bantuan,
+            'item_bantuan' => $request->item_bantuan,
+            'jenis_bantuan' => $request->jenis_bantuan,
+        ]);
+        return redirect()->back()->withToastSuccess('Berhasil menambahkan data periode');
     }
 
     /**

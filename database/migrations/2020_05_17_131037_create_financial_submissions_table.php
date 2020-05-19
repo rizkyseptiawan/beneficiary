@@ -15,9 +15,11 @@ class CreateFinancialSubmissionsTable extends Migration
     {
         Schema::create('financial_submissions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sub_criteria_id');
             $table->unsignedBigInteger('beneficiary_id');
-            $table->enum('status_pengajuan',['Diajukan','Diterima','Belum Berkesempatan'])->default('Diajukan');
+            $table->unsignedBigInteger('funds_assistance_period_id');
+            $table->string('kode_pengajuan')->unique();
+            $table->unsignedDecimal('nilai_total_kriteria');
+            $table->enum('status_pengajuan',['Pengajuan','Diterima','Belum Berkesempatan'])->default('Pengajuan');
             $table->timestamps();
         });
     }
