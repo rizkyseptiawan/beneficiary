@@ -45,7 +45,11 @@
               <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tanggal Lahir</label>
                 <div class="col-sm-12 col-md-7">
-                  <input type="date" name="tanggal_lahir" class="form-control" value="{{ $beneficiary->tanggal_lahir->format('Y-m-d') }}">
+                    @empty($beneficiary->tanggal_lahir)
+                    <input type="date" name="tanggal_lahir" class="form-control" value="">
+                    @else
+                    <input type="date" name="tanggal_lahir" class="form-control" value="{{ $beneficiary->tanggal_lahir->format('Y-m-d') }}">
+                    @endempty
                 </div>
               </div>
               <div class="form-group row mb-4">

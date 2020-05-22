@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{{ asset('modules/weathericons/css/weather-icons-wind.min.css') }}">
   <link rel="stylesheet" href="{{ asset('modules/summernote/dist/summernote-bs4.css') }}">
   <link rel="stylesheet" href="{{ asset('modules/izitoast/dist/css/iziToast.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('modules/select2/dist/css/select2.min.css') }}">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -28,6 +29,9 @@
       <div class="navbar-bg"></div>
       <nav class="navbar navbar-expand-lg main-navbar">
         <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+          </ul>
         </form>
         <ul class="navbar-nav navbar-right">
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
@@ -35,16 +39,19 @@
             <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->name }}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Selamat Datang!</div>
-              <a href="features-profile.html" class="dropdown-item has-icon">
+              <a href="{{ route('beneficiary.profile') }}" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Biodata
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item has-icon text-danger">
+              <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Keluar
               </a>
             </div>
           </li>
         </ul>
+        <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
       </nav>
       <div class="main-sidebar">
         @include('layouts.sidebar_menu')
@@ -67,10 +74,10 @@
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; 2020 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+          Copyright &copy; 2020 <div class="bullet"></div> Made with <span class="text-danger font-weight-bold">♥</span> <a href="https://nauval.in/">Rizky Septiawan</a>
         </div>
         <div class="footer-right">
-          2.3.0
+          Template By Stisla
         </div>
       </footer>
     </div>
@@ -99,7 +106,7 @@
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/custom.js') }}"></script>
   <script src="{{ asset('assets/js/crud.js') }}"></script>
-
+  <script src="{{ asset('modules/select2/dist/js/select2.full.min.js')}}"></script>
   <!-- Page Specific JS File -->
   <script src="{{ asset('assets/js/page/index-0.js') }}"></script>
   @yield('custom')

@@ -3,125 +3,6 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-/* attach a submit handler to the form */
-$("#create-form").submit(function (event) {
-    /* stop form from submitting normally */
-    event.preventDefault();
-
-    /* get the action attribute from the <form action=""> element */
-    var $form = $(this),
-        url = $form.attr('action');
-
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: new FormData(this),
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            toastr.success(response.message, "Berhasil", {
-                timeOut: 5e3,
-                closeButton: !0,
-                debug: !1,
-                newestOnTop: !0,
-                progressBar: !0,
-                positionClass: "toast-top-right",
-                preventDuplicates: !0,
-                onclick: null,
-                showDuration: "300",
-                hideDuration: "1000",
-                extendedTimeOut: "1000",
-                showEasing: "swing",
-                hideEasing: "linear",
-                showMethod: "fadeIn",
-                hideMethod: "fadeOut",
-                tapToDismiss: !1
-            });
-            $form.trigger("reset");
-        },
-        error: function (xhr, status, error) {
-            var err = eval("(" + xhr.responseText + ")");
-            toastr.error(err.message, "Gagal", {
-                timeOut: 5e3,
-                closeButton: !0,
-                debug: !1,
-                newestOnTop: !0,
-                progressBar: !0,
-                positionClass: "toast-top-right",
-                preventDuplicates: !0,
-                onclick: null,
-                showDuration: "300",
-                hideDuration: "1000",
-                extendedTimeOut: "1000",
-                showEasing: "swing",
-                hideEasing: "linear",
-                showMethod: "fadeIn",
-                hideMethod: "fadeOut",
-                tapToDismiss: !1
-            });
-            // alert(" Can't do because: " + xhr.responseText.message);
-        },
-    });
-});
-/* attach a submit handler to the form */
-$("#update-form").submit(function (event) {
-    /* stop form from submitting normally */
-    event.preventDefault();
-
-    /* get the action attribute from the <form action=""> element */
-    var $form = $(this),
-        url = $form.attr('action');
-
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: new FormData(this),
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            toastr.success(response.message, "Berhasil", {
-                timeOut: 5e3,
-                closeButton: !0,
-                debug: !1,
-                newestOnTop: !0,
-                progressBar: !0,
-                positionClass: "toast-top-right",
-                preventDuplicates: !0,
-                onclick: null,
-                showDuration: "300",
-                hideDuration: "1000",
-                extendedTimeOut: "1000",
-                showEasing: "swing",
-                hideEasing: "linear",
-                showMethod: "fadeIn",
-                hideMethod: "fadeOut",
-                tapToDismiss: !1
-            });
-        },
-        error: function (xhr, status, error) {
-            var err = eval("(" + xhr.responseText + ")");
-            toastr.error(err.message, "Gagal", {
-                timeOut: 5e3,
-                closeButton: !0,
-                debug: !1,
-                newestOnTop: !0,
-                progressBar: !0,
-                positionClass: "toast-top-right",
-                preventDuplicates: !0,
-                onclick: null,
-                showDuration: "300",
-                hideDuration: "1000",
-                extendedTimeOut: "1000",
-                showEasing: "swing",
-                hideEasing: "linear",
-                showMethod: "fadeIn",
-                hideMethod: "fadeOut",
-                tapToDismiss: !1
-            });
-            // alert(" Can't do because: " + xhr.responseText.message);
-        },
-    });
-});
 
 function deleteData(link, item) {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -180,7 +61,7 @@ function deleteData(link, item) {
         }
     });
 }
-function verificationData(link, item) {
+function acceptData(link, item) {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-success',
@@ -189,7 +70,7 @@ function verificationData(link, item) {
         buttonsStyling: false
     })
     swalWithBootstrapButtons.fire({
-        title: 'Apakah Anda yakin akan memverifikasi data ' + item + ' ?',
+        title: 'Apakah Anda yakin akan menerima data pengajuan dari ' + item + ' ?',
         text: "Anda tidak dapat mengembalikan ini",
         icon: 'warning',
         showCancelButton: true,
@@ -200,7 +81,7 @@ function verificationData(link, item) {
         var url = link;
         if (result.value) {
             $.ajax({
-                type: "GET",
+                type: "PATCH",
                 url: url,
                 dataType: "json",
                 success: function (response) {
@@ -210,8 +91,7 @@ function verificationData(link, item) {
                             response.message,
                             'success'
                         )
-                        var oTable = $('table').dataTable();
-                        oTable.fnDraw(true);
+                        location.reload();
                     } else {
                         swalWithBootstrapButtons.fire(
                             'Gagal',
@@ -222,37 +102,23 @@ function verificationData(link, item) {
                 },
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");
-                    toastr.error(err.message, "Gagal", {
-                        timeOut: 5e3,
-                        closeButton: !0,
-                        debug: !1,
-                        newestOnTop: !0,
-                        progressBar: !0,
-                        positionClass: "toast-top-right",
-                        preventDuplicates: !0,
-                        onclick: null,
-                        showDuration: "300",
-                        hideDuration: "1000",
-                        extendedTimeOut: "1000",
-                        showEasing: "swing",
-                        hideEasing: "linear",
-                        showMethod: "fadeIn",
-                        hideMethod: "fadeOut",
-                        tapToDismiss: !1
+                    iziToast.error({
+                        title : 'Gagal',
+                        message : err.message,
+                        position : 'topRight',
                     });
                 },
             });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             swalWithBootstrapButtons.fire(
                 'Dibatalkan',
-                'Anda batal memverifikasi data',
+                'Anda batal menerima data pengajuan',
                 'error'
             )
         }
     });
 }
-
-function unverificationData(link, item) {
+function declineData(link, item) {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-success',
@@ -261,7 +127,7 @@ function unverificationData(link, item) {
         buttonsStyling: false
     })
     swalWithBootstrapButtons.fire({
-        title: 'Apakah Anda yakin tidak akan memverifikasi data ' + item + ' ?',
+        title: 'Apakah Anda yakin akan menolak data pengajuan dari ' + item + ' ?',
         text: "Anda tidak dapat mengembalikan ini",
         icon: 'warning',
         showCancelButton: true,
@@ -272,7 +138,7 @@ function unverificationData(link, item) {
         var url = link;
         if (result.value) {
             $.ajax({
-                type: "GET",
+                type: "PATCH",
                 url: url,
                 dataType: "json",
                 success: function (response) {
@@ -282,8 +148,7 @@ function unverificationData(link, item) {
                             response.message,
                             'success'
                         )
-                        var oTable = $('table').dataTable();
-                        oTable.fnDraw(true);
+                        location.reload();
                     } else {
                         swalWithBootstrapButtons.fire(
                             'Gagal',
@@ -294,30 +159,17 @@ function unverificationData(link, item) {
                 },
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");
-                    toastr.error(err.message, "Gagal", {
-                        timeOut: 5e3,
-                        closeButton: !0,
-                        debug: !1,
-                        newestOnTop: !0,
-                        progressBar: !0,
-                        positionClass: "toast-top-right",
-                        preventDuplicates: !0,
-                        onclick: null,
-                        showDuration: "300",
-                        hideDuration: "1000",
-                        extendedTimeOut: "1000",
-                        showEasing: "swing",
-                        hideEasing: "linear",
-                        showMethod: "fadeIn",
-                        hideMethod: "fadeOut",
-                        tapToDismiss: !1
+                    iziToast.error({
+                        title : 'Gagal',
+                        message : err.message,
+                        position : 'topRight',
                     });
                 },
             });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             swalWithBootstrapButtons.fire(
                 'Dibatalkan',
-                'Anda batal memverifikasi data',
+                'Anda batal menolak data pengajuan ini',
                 'error'
             )
         }

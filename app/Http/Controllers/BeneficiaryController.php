@@ -93,6 +93,13 @@ class BeneficiaryController extends Controller
         return view('beneficiary.edit',compact('beneficiary'));
     }
 
+    public function beneficiary()
+    {
+        $user = auth()->user();
+        $beneficiary = \App\Beneficiary::findOrFail($user->beneficiary->id);
+        return view('beneficiary.edit',compact('beneficiary'));
+    }
+
     /**
      * Update the specified resource in storage.
      *

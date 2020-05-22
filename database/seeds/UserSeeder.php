@@ -15,13 +15,13 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'name' => 'Rizky Septiawan',
-                'email' => 'rizseptiawan@gmail.com',
+                'email' => 'admin@asep.codes',
                 'password' => Hash::make('admin123'),
                 'role' => 'admin',
             ],
             [
-                'name' => 'Sasenna',
-                'email' => 'sena@gmail.com',
+                'name' => 'Penerima Bantuan',
+                'email' => 'penerima@asep.codes',
                 'password' => Hash::make('penerima123'),
                 'role' => 'beneficiary',
             ],
@@ -30,6 +30,11 @@ class UserSeeder extends Seeder
         foreach ($users as $user) {
             $createdUser = \App\User::create(Arr::except($user,'role'));
             $createdUser->assignRole($user['role']);
+            if($user['role'] == 'beneficiary'){
+                \App\Beneficiary::create([
+                    'nama_penerima' => 'Penerima Bantuan',
+                ]);
+            }
         }
     }
 }

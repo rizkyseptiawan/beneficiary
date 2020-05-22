@@ -1,9 +1,9 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href="{{ url('/') }}">Beneficiary</a>
+        <a href="{{ url('/') }}">SPPK-Beneficiary</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-        <a href="index.html">{{ url('/') }}</a>
+        <a href="{{ url('/') }}">B</a>
     </div>
     <ul class="sidebar-menu">
         @if(auth()->user()->hasRole('admin'))
@@ -21,14 +21,18 @@
             <a href="{{ route('criteria.index') }}" class="nav-link"><i class="fas fa-th-list"></i><span>Kriteria</span></a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-list-ol"></i><span>Sub Kriteria</span></a>
+            <a href="{{ route('subcriteria.index') }}" class="nav-link"><i class="fas fa-list-ol"></i><span>Sub Kriteria</span></a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-square-root-alt"></i><span>Dukung Keputusan</span></a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-history"></i><span>Riwayat
+            <a href="{{ route('history.create') }}" class="nav-link"><i class="fas fa-comments-dollar"></i><span>Pengajuan
                     Bantuan</span></a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('history.index') }}" class="nav-link"><i class="fas fa-history"></i><span>Riwayat
+                    Bantuan</span></a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('history.calculate') }}" class="nav-link"><i class="fas fa-square-root-alt"></i><span>Dukung Keputusan</span></a>
         </li>
         @endif
         @if(auth()->user()->hasRole('beneficiary'))
@@ -37,15 +41,15 @@
             <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-user"></i><span>Biodata
+            <a href="{{ route('beneficiary.profile') }}" class="nav-link"><i class="fas fa-user"></i><span>Biodata
                     Penerima</span></a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-comments-dollar"></i><span>Pengajuan
+            <a href="{{ route('history.create') }}" class="nav-link"><i class="fas fa-comments-dollar"></i><span>Pengajuan
                     Bantuan</span></a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-history"></i><span>Riwayat
+            <a href="{{ route('history.index') }}" class="nav-link"><i class="fas fa-history"></i><span>Riwayat
                     Bantuan</span></a>
         </li>
         @endif
