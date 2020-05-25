@@ -32,6 +32,7 @@ class UserSeeder extends Seeder
             $createdUser->assignRole($user['role']);
             if($user['role'] == 'beneficiary'){
                 \App\Beneficiary::create([
+                    'user_id' => $createdUser->id,
                     'nama_penerima' => 'Penerima Bantuan',
                 ]);
             }
