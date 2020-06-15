@@ -15,6 +15,7 @@ class UserController extends Controller
             $user = auth()->user();
             $data['status'] = true;
             $data['token'] =  $user->createToken('Breakpoin Appliction')->accessToken;
+            $data['loginData'] = $user;
             return response()->json($data, 200);
         }
         else {

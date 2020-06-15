@@ -63,22 +63,22 @@ class CriteriaSeeder extends Seeder
         $subCriteria1 = [
             [
                 'criteria_id' => 1,
-                'nama_sub_kriteria' => 'Domisili dan Menerima Bantuan Lain',
+                'nama_sub_kriteria' => 'Non Domisili dan Menerima Bantuan Lain',
                 'nilai_sub_kriteria' => 1,
             ],
             [
                 'criteria_id' => 1,
-                'nama_sub_kriteria' => 'Domisili dan Tidak Menerima Bantuan',
+                'nama_sub_kriteria' => 'Domisili dan Menerima Bantuan Lain',
                 'nilai_sub_kriteria' => 2,
             ],
             [
                 'criteria_id' => 1,
-                'nama_sub_kriteria' => 'Non Domisili dan Menerima Bantuan Lain',
+                'nama_sub_kriteria' => 'Non Domisili dan Tidak Menerima Bantuan',
                 'nilai_sub_kriteria' => 3,
             ],
             [
                 'criteria_id' => 1,
-                'nama_sub_kriteria' => 'Non Domisili dan Tidak Menerima Bantuan',
+                'nama_sub_kriteria' => 'Domisili dan Tidak Menerima Bantuan',
                 'nilai_sub_kriteria' => 4,
             ],
         ];
@@ -168,12 +168,12 @@ class CriteriaSeeder extends Seeder
         $subCriteria6 = [
             [
                 'criteria_id' => 6,
-                'nama_sub_kriteria' => 'Diatas Rp. 2.000.000',
+                'nama_sub_kriteria' => 'Dibawah Rp. 500.000',
                 'nilai_sub_kriteria' => 1,
             ],
             [
                 'criteria_id' => 6,
-                'nama_sub_kriteria' => '1.500.000 - 2.000.000',
+                'nama_sub_kriteria' => '500.000 - 1.000.000',
                 'nilai_sub_kriteria' => 2,
             ],
             [
@@ -183,12 +183,12 @@ class CriteriaSeeder extends Seeder
             ],
             [
                 'criteria_id' => 6,
-                'nama_sub_kriteria' => '500.000 - 1.000.000',
+                'nama_sub_kriteria' => '1.500.000 - 2.000.000',
                 'nilai_sub_kriteria' => 4,
             ],
             [
                 'criteria_id' => 6,
-                'nama_sub_kriteria' => 'Dibawah Rp. 500.000',
+                'nama_sub_kriteria' => 'Diatas Rp. 2.000.000',
                 'nilai_sub_kriteria' => 5,
             ],
         ];

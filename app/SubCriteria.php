@@ -13,4 +13,5 @@ class SubCriteria extends Model
     {
         return $this->belongsTo('App\Criteria');
     }
+
 }
