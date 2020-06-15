@@ -39,10 +39,12 @@
             <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->name }}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Selamat Datang!</div>
+              @role('beneficiary')
               <a href="{{ route('beneficiary.profile') }}" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Biodata
               </a>
               <div class="dropdown-divider"></div>
+              @endrole
               <a href="javascript:void()" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();" class="dropdown-item has-icon text-danger">
                 <i class="fas fa-sign-out-alt"></i> Keluar
               </a>

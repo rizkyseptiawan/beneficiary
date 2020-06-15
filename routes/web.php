@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/tambah', 'BeneficiaryController@create')->name('create')->middleware('role:admin');
         Route::get('{id}/detail', 'BeneficiaryController@show')->name('show')->middleware('role:admin');
         Route::get('{id}/edit', 'BeneficiaryController@edit')->name('edit')->middleware('role:admin');
-        Route::get('/biodata-saya', 'BeneficiaryController@beneficiary')->name('profile');
+        Route::get('/biodata-saya', 'BeneficiaryController@beneficiary')->name('profile')->middleware('role:beneficiary');
         Route::post('/tambah', 'BeneficiaryController@store')->name('store')->middleware('role:admin');
         Route::patch('{id}/update', 'BeneficiaryController@update')->name('update')->middleware('role:admin');
         Route::delete('{id}/hapus', 'BeneficiaryController@destroy')->name('delete')->middleware('role:admin');
