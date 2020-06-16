@@ -100,8 +100,6 @@ class FinancialSubmissionController extends Controller
         $input = $request->all();
         $dataValidation = [
             'funds_assistance_period_id' => 'required|exists:funds_assistance_periods,id',
-            'criterias' => 'required',
-
         ];
         $validation = Validator::make($input,$dataValidation);
         if($validation->fails()){

@@ -76,7 +76,7 @@
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; 2020 <div class="bullet"></div> Made with <span class="text-danger font-weight-bold">♥</span> <a href="https://nauval.in/">Rizky Septiawan</a>
+          Copyright &copy; 2020 <div class="bullet"></div> Made with <span class="text-danger font-weight-bold">♥</span> <a href="https://nauval.in/">Kelompok 10</a>
         </div>
         <div class="footer-right">
           Template By Stisla

@@ -68,12 +68,12 @@ class CriteriaSeeder extends Seeder
             ],
             [
                 'criteria_id' => 1,
-                'nama_sub_kriteria' => 'Domisili dan Menerima Bantuan Lain',
+                'nama_sub_kriteria' => 'Non Domisili dan Tidak Menerima Bantuan',
                 'nilai_sub_kriteria' => 2,
             ],
             [
                 'criteria_id' => 1,
-                'nama_sub_kriteria' => 'Non Domisili dan Tidak Menerima Bantuan',
+                'nama_sub_kriteria' => 'Domisili dan Menerima Bantuan Lain',
                 'nilai_sub_kriteria' => 3,
             ],
             [
